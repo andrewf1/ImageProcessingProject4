@@ -90,7 +90,7 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 	Mat temp_img;
 	tgt.create(src.rows, src.cols, CV_32S);
 	temp_img.create(src.rows, src.cols, CV_32S);
-	temp_img.clone(src);
+	src.copyTo(temp_img);
 	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
@@ -135,6 +135,6 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 			}
 		}
 		// cout << "copies temp to tgt" << endl;
-		tgt.clone(temp_img);
+		tgt.copyTo(temp_img);
 	}
 }
