@@ -89,7 +89,7 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 	// allocating the memory for the target/temp images
 	Mat temp_img;
 	tgt.create(src.rows, src.cols, CV_32S);
-	temp_img.create(src.rows, src.cols, CV_32S);)
+	temp_img.create(src.rows, src.cols, CV_32S);
 	src.copyTo(temp_img);
 	cout << "copied src to temp_img" << endl;
 
