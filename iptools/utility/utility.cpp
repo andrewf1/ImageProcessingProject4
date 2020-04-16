@@ -90,7 +90,7 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 	Mat temp_img;
 	tgt.create(src.rows, src.cols, CV_32S);
 	temp_img.create(src.rows, src.cols, CV_32S);
-	src.copyTo(temp_img);
+	temp_img.clone(src);
 	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
@@ -130,11 +130,11 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 				else {
 					// cout << "sets not in roi" << endl;
 					int newVal = temp_img.at<int>(i, j);
-					tgt.at<int>(i, j) = newVal;
+					tgt.at<int>(i, j) = checkValue(newVal);
 				}
 			}
 		}
 		// cout << "copies temp to tgt" << endl;
-		tgt.copyTo(temp_img);
+		tgt.clone(temp_img);
 	}
 }
