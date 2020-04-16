@@ -1,4 +1,3 @@
-
 #ifndef ROI_HPP
 #define ROI_HPP
 

@@ -11,7 +11,6 @@ using namespace std;
 
 int main (int argc, char** argv)
 {
-    image src, tgt;
     FILE *fp;
     char str[MAXLEN];
     char outfile[MAXLEN];
@@ -23,8 +22,13 @@ int main (int argc, char** argv)
 
     while (fgets(str, MAXLEN, fp) != NULL) {
         pch = strtok(str, " ");
-        src.read(pch); // creating the source image
         string src_name = pch;
+        cv::Mat I2, I = cv::imread(src_name);
+
+        if (I.empty()) {
+            cout << "Could not open or find the image: " << src_name << endl;
+            exit(1);
+        }
 
         pch = strtok(NULL, " ");
         strcpy(outfile, pch);
@@ -54,12 +58,12 @@ int main (int argc, char** argv)
 
                 if (func_name == "hist_mod") {
                     pch = strtok(NULL, " ");
-                    int a_i = atoi(pch);
+                    int a = atoi(pch);
                     pch = strtok(NULL, " ");
-                    int b_i = atoi(pch);
+                    int b = atoi(pch);
                     roi new_region = roi(x, y, sx, sy);
-                    new_region.a = a_i;
-                    new_region.b = b_i;
+                    new_region.a = a;
+                    new_region.b = b;
                     regions.push_back(new_region);
                 }
                 else if (func_name == "edge_detect") {
@@ -92,7 +96,7 @@ int main (int argc, char** argv)
         // actually calling all the functions
         if (func_name == "hist_mod") {
             // auto start = chrono::high_resolution_clock::now();
-            utility::cv_hist_mod(src, tgt, regions, outfile);
+            utility::cv_hist_mod(I, I2, regions, outfile);
             // auto end = chrono::high_resolution_clock::now();
             // cout << "Gray Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
@@ -113,7 +117,7 @@ int main (int argc, char** argv)
             exit(1);
         }
 
-        tgt.save(outfile);
+        cv::imwrite(outfile, I2);
     }
 
     fclose(fp);
