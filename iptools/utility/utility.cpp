@@ -86,9 +86,12 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
-	tgt.create(src.rows, src.cols, CV_32S); // allocating the memory for the target image
+	// allocating the memory for the target/temp images
 	Mat temp_img;
+	tgt.create(src.rows, src.cols, CV_32S);
+	temp_img.create(src.rows, src.cols, CV_32S);)
 	src.copyTo(temp_img);
+	cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
 		vector<int> original_hist_vec(256, 0);
@@ -115,21 +118,26 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 					int curr_pixel = temp_img.at<int>(i, j);
 
 					if (curr_pixel < a) {
+						cout << "sets a" << endl;
 						tgt.at<int>(i, j) = MINRGB;
 					}
 					else if (curr_pixel > b) {
+						cout << "sets b" << endl;
 						tgt.at<int>(i, j) = MAXRGB;
 					}
 					else {
+						cout << "sets else" << endl;
 						int newVal = (curr_pixel - a) * (255 / (b - a));
 						tgt.at<int>(i, j) = checkValue(newVal);
 					}
 				}
 				else {
+					cout << "sets not in roi" << endl;
 					tgt.at<int>(i, j) = temp_img.at<int>(i, j);
 				}
 			}
 		}
+		cout << "copies temp to tgt" << endl;
 		tgt.copyTo(temp_img);
 	}
 }
