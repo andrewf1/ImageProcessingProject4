@@ -86,5 +86,18 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
-	std::cout << "Hello World!" << std::endl;
+	cout << src.size() << endl;
+	for (int r = 0; r < regions.size(); r++) {
+		vector<int> original_hist_vec(256, 0);
+		vector<int> new_img_hist_vec(256, 0);
+
+		int x = regions.at(r).x;
+		int y = regions.at(r).y;
+		int sx = regions.at(r).sx;
+		int sy = regions.at(r).sy;
+		int a = regions.at(r).a;
+		int b = regions.at(r).b;
+
+
+	}
 }
