@@ -94,16 +94,15 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 	cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
-		vector<int> original_hist_vec(256, 0);
-		vector<int> new_img_hist_vec(256, 0);
-
+		cout << "in regions loop" << endl;
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
 		int a = regions.at(r).a;
 		int b = regions.at(r).b;
-
+		cout << "sets regions var info" << endl;
+		
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
 				if (
@@ -112,11 +111,7 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 					j >= x &&
 					j < (x + sx)
 				) {
-					int intensity_value = temp_img.at<int>(i, j);
-					original_hist_vec.at(intensity_value) += 1;
-					
 					int curr_pixel = temp_img.at<int>(i, j);
-
 					if (curr_pixel < a) {
 						cout << "sets a" << endl;
 						tgt.at<int>(i, j) = MINRGB;
