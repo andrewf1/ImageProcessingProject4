@@ -91,17 +91,17 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 	tgt.create(src.rows, src.cols, CV_32S);
 	temp_img.create(src.rows, src.cols, CV_32S);
 	src.copyTo(temp_img);
-	cout << "copied src to temp_img" << endl;
+	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
-		cout << "in regions loop" << endl;
+		// cout << "in regions loop" << endl;
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
 		int a = regions.at(r).a;
 		int b = regions.at(r).b;
-		cout << "sets regions var info" << endl;
+		// cout << "sets regions var info" << endl;
 		
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
@@ -113,26 +113,27 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 				) {
 					int curr_pixel = temp_img.at<int>(i, j);
 					if (curr_pixel < a) {
-						cout << "sets a" << endl;
+						// cout << "sets a" << endl;
 						tgt.at<int>(i, j) = MINRGB;
 					}
 					else if (curr_pixel > b) {
-						cout << "sets b" << endl;
+						// cout << "sets b" << endl;
 						tgt.at<int>(i, j) = MAXRGB;
 					}
 					else {
-						cout << "sets else" << endl;
+						// cout << "sets else" << endl;
 						int newVal = (curr_pixel - a) * (255 / (b - a));
 						tgt.at<int>(i, j) = checkValue(newVal);
 					}
 				}
 				else {
-					cout << "sets not in roi" << endl;
-					tgt.at<int>(i, j) = temp_img.at<int>(i, j);
+					// cout << "sets not in roi" << endl;
+					int newVal = temp_img.at<int>(i, j);
+					tgt.at<int>(i, j) = newVal;
 				}
 			}
 		}
-		cout << "copies temp to tgt" << endl;
+		// cout << "copies temp to tgt" << endl;
 		tgt.copyTo(temp_img);
 	}
 }

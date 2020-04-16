@@ -1,3 +1,2 @@
-baboon.pgm baboon_edge_d.pgm hist_mod 2
-0 0 100 300 100 200 
-320 80 150 150 100 200
+slope.pgm slope_hist_stretch.pgm hist_mod 1
+0 0 800 534 100 200
