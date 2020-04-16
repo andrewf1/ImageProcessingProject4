@@ -86,7 +86,9 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
-	cout << src.size() << endl;
+	Mat temp_img;
+	src.copyTo(temp_img);
+
 	for (int r = 0; r < regions.size(); r++) {
 		vector<int> original_hist_vec(256, 0);
 		vector<int> new_img_hist_vec(256, 0);
@@ -98,6 +100,35 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 		int a = regions.at(r).a;
 		int b = regions.at(r).b;
 
+		for (int i = 0; i < temp_img.rows; i++) {
+			for (int j = 0; j < temp_img.cols; j++) {
+				if (
+					i >= y &&
+					i < (y + sy) &&
+					j >= x &&
+					j < (x + sx)
+				) {
+					int intensity_value = temp_img.at<int>(i, j);
+					original_hist_vec.at(intensity_value) += 1;
+					
+					int curr_pixel = temp_img.at<int>(i, j);
 
+					if (curr_pixel < a) {
+						tgt.at<int>(i, j) = MINRGB;
+					}
+					else if (curr_pixel > b) {
+						tgt.at<int>(i, j) = MAXRGB;
+					}
+					else {
+						int newVal = (curr_pixel - a) * (255 / (b - a));
+						tgt.at<int>(i, j) = checkValue(newVal);
+					}
+				}
+				else {
+					tgt.at<int>(i, j) = temp_img.at<int>(i, j);
+				}
+			}
+		}
+		tgt.copyTo(temp_img);
 	}
 }
