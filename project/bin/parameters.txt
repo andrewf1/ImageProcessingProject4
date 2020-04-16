@@ -1,6 +1,3 @@
-baboon.pgm baboon_bi125.pgm binarize 125
-baboon.pgm baboon_add50.pgm add 50
-baboon.pgm baboon_s200.pgm scale 2
-baboon.pgm baboon_s50.pgm scale 0.5
-11.jpg 11_gray.jpg opencv gray
-11.jpg 11_blur.jpg opencv blur_avg 5
+baboon.pgm baboon_edge_d.pgm hist_mod 2
+0 0 100 300 100 200 
+320 80 150 150 100 200

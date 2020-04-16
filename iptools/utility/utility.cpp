@@ -83,3 +83,8 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 {
 	blur(src,tgt,Size(WindowSize,WindowSize));
 }
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
+	std::cout << "Hello World!" << std::endl;
+}
