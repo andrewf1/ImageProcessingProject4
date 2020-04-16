@@ -112,6 +112,7 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 					j < (x + sx)
 				) {
 					int curr_pixel = temp_img.at<int>(i, j);
+					cout << "curr_pixel = " << curr_pixel << endl;
 					if (curr_pixel < a) {
 						// cout << "sets a" << endl;
 						tgt.at<int>(i, j) = MINRGB;
