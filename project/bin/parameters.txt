@@ -3,4 +3,4 @@ slope.pgm slope_hist_stretch.pgm hist_stretch 1
 slope.pgm slope_hist_eq.pgm hist_eq 1
 0 0 800 534
 baboon.pgm baboon_canny.pgm canny_edge 1
-0 0 100 300 200 300
+0 0 300 250 200 300
