@@ -88,7 +88,7 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
 	// allocating the memory for the target/temp images
 	Mat temp_img;
-	cv_gray(src, temp_img, COLOR_BGR2GRAY);
+	cv_gray(src, temp_img);
 	tgt = temp_img.clone();
 	// cout << "copied src to temp_img" << endl;
 
