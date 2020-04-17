@@ -87,10 +87,8 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
 	// allocating the memory for the target/temp images
-	Mat temp_img;
+	Mat temp_img = src.clone();
 	tgt.create(src.rows, src.cols, CV_32S);
-	temp_img.create(src.rows, src.cols, CV_32S);
-	src.copyTo(temp_img);
 	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
@@ -112,7 +110,7 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 					j < (x + sx)
 				) {
 					int curr_pixel = temp_img.at<int>(i, j);
-					// cout << "curr_pixel = " << curr_pixel << endl;
+					cout << "curr_pixel = " << curr_pixel << endl;
 					if (curr_pixel < a) {
 						// cout << "sets a" << endl;
 						tgt.at<int>(i, j) = MINRGB;
