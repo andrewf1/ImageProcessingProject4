@@ -96,6 +96,7 @@ int main (int argc, char** argv)
             // cout << "Gray Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "hist_eq") {
+            utility::cv_hist_eq(I, I2, regions);
             // auto start = chrono::high_resolution_clock::now();
             // utility::RGBEdgeDetection(src, tgt, regions, outfile);
             // auto end = chrono::high_resolution_clock::now();

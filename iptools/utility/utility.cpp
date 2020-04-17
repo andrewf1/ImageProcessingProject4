@@ -141,7 +141,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 }
 
 /*-----------------------------------------------------------------------**/
-void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vecotr<roi>& regions, char* outfile) {
+void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
 	cv_gray(src, temp_img);
 
