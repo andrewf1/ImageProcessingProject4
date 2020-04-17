@@ -147,9 +147,9 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 	tgt = temp_img.clone();
 
 	Mat eq_tgt;
-	cout << "temp_img->eq_tgt" << endl;
-	cv_gray(temp_img, eq_tgt);
-	cout << "temp_img->eq_tgt" << endl;
+	cout << "clone tgt to eqtgt" << endl;
+	eq_tgt = tgt.clone();
+	cout << "clone tgt to eqtgt" << endl;
 	cout << "calling eqHist" << endl;
 	equalizeHist(temp_img, tgt);
 	cout << "done with eqHist" << endl;
