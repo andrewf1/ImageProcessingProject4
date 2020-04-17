@@ -135,7 +135,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 		}
 		// cout << "copies temp to tgt" << endl;
 		cout << "bout to copy to tempImg" << endl;
-		tgt.copyTo(temp_img);
+		cv_gray(tgt, temp_img);
 		cout << "copied at end" << endl;
 	}
 }
