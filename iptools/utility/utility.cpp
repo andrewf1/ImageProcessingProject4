@@ -139,20 +139,20 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
-	cout << "in cv_hist_eq" << endl;
+	// cout << "in cv_hist_eq" << endl;
 	Mat temp_img;
-	cout << "src->temp_img" << endl;
+	// cout << "src->temp_img" << endl;
 	cv_gray(src, temp_img);
-	cout << "src->temp_img" << endl;
+	// cout << "src->temp_img" << endl;
 	tgt = temp_img.clone();
 
 	Mat eq_tgt;
-	cout << "clone tgt to eqtgt" << endl;
+	// cout << "clone tgt to eqtgt" << endl;
 	eq_tgt = tgt.clone();
-	cout << "clone tgt to eqtgt" << endl;
-	cout << "calling eqHist" << endl;
-	equalizeHist(temp_img, tgt);
-	cout << "done with eqHist" << endl;
+	// cout << "clone tgt to eqtgt" << endl;
+	// cout << "calling eqHist" << endl;
+	equalizeHist(temp_img, eq_tgt);
+	// cout << "done with eqHist" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
 		// cout << "in regions loop" << endl;
