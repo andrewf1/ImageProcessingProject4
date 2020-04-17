@@ -67,15 +67,9 @@ int main (int argc, char** argv)
                     new_region.b = b;
                     regions.push_back(new_region);
                 }
-                else if (func_name == "edge_detect") {
-                    // pch = strtok(NULL, " ");
-                    // int color_thresh = atoi(pch);
-                    // pch = strtok(NULL, " ");
-                    // int color_direction = atoi(pch);
-                    // roi new_region = roi(x, y, sx, sy);
-                    // new_region.color_threshold = color_thresh;
-                    // new_region.color_direction = color_direction;
-                    // regions.push_back(new_region);                   
+                else if (func_name == "hist_eq") {
+                    roi new_region = roi(x, y, sx, sy);
+                    regions.push_back(new_region);
                 }
                 else if (func_name == "comb_ops") {
                     // pch = strtok(NULL, " ");
@@ -101,7 +95,7 @@ int main (int argc, char** argv)
             // auto end = chrono::high_resolution_clock::now();
             // cout << "Gray Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
-        else if (func_name == "edge_detect") {
+        else if (func_name == "hist_eq") {
             // auto start = chrono::high_resolution_clock::now();
             // utility::RGBEdgeDetection(src, tgt, regions, outfile);
             // auto end = chrono::high_resolution_clock::now();

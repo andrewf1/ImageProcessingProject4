@@ -139,3 +139,37 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 		cout << "copied at end" << endl;
 	}
 }
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vecotr<roi>& regions, char* outfile) {
+	Mat temp_img;
+	cv_gray(src, temp_img);
+
+	for (int r = 0; r < regions.size(); r++) {
+		// cout << "in regions loop" << endl;
+		int x = regions.at(r).x;
+		int y = regions.at(r).y;
+		int sx = regions.at(r).sx;
+		int sy = regions.at(r).sy;
+		int a = regions.at(r).a;
+		int b = regions.at(r).b;
+		// cout << "sets regions var info" << endl;
+		
+		for (int i = 0; i < temp_img.rows; i++) {
+			for (int j = 0; j < temp_img.cols; j++) {
+				if (
+					i >= y &&
+					i < (y + sy) &&
+					j >= x &&
+					j < (x + sx)
+				) {
+					equalizeHist(temp_img, tgt);
+				}
+				else {
+					tgt.at<int>(i, j) = checkValue(temp_img.at<int>(i, j));
+				}
+			}
+		}
+		cv_gray(tgt, temp_img);
+	}
+}
