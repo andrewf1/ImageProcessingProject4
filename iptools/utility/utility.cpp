@@ -145,7 +145,9 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 
 	Mat eq_tgt;
 	cv_gray(temp_img, eq_tgt);
+	cout << "calling eqHist" << endl;
 	equalizeHist(temp_img, tgt);
+	cout << "done with eqHist" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
 		// cout << "in regions loop" << endl;
@@ -170,6 +172,8 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 				}
 			}
 		}
+		cout << "bout to copy" << endl;
 		tgt.copyTo(temp_img);
+		cout << "copied" << endl;
 	}
 }
