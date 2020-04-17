@@ -85,7 +85,7 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 }
 
 /*-----------------------------------------------------------------------**/
-void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, char* outfile) {
+void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
 	// allocating the memory for the target/temp images
 	Mat temp_img;
 	cv_gray(src, temp_img);
@@ -111,7 +111,6 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 					j < (x + sx)
 				) {
 					int curr_pixel = temp_img.at<uchar>(i, j);
-					cout << "curr_pixel = " << curr_pixel << endl;
 					if (curr_pixel < a) {
 						// cout << "sets a" << endl;
 						tgt.at<uchar>(i, j) = MINRGB;
@@ -134,9 +133,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 			}
 		}
 		// cout << "copies temp to tgt" << endl;
-		cout << "bout to copy to tempImg" << endl;
 		tgt.copyTo(temp_img);
-		cout << "copied at end" << endl;
 	}
 }
 
@@ -144,6 +141,11 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
 	cv_gray(src, temp_img);
+	tgt = temp_img.clone();
+
+	Mat eq_tgt;
+	cv_gray(temp_img, eq_tgt);
+	equalizeHist(temp_img, tgt);
 
 	for (int r = 0; r < regions.size(); r++) {
 		// cout << "in regions loop" << endl;
@@ -151,8 +153,6 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 		int y = regions.at(r).y;
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
-		int a = regions.at(r).a;
-		int b = regions.at(r).b;
 		// cout << "sets regions var info" << endl;
 		
 		for (int i = 0; i < temp_img.rows; i++) {
@@ -163,13 +163,13 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 					j >= x &&
 					j < (x + sx)
 				) {
-					equalizeHist(temp_img, tgt);
+					tgt.at<uchar>(i, j) = checkValue(eq_tgt.at<uchar>(i, j));
 				}
 				else {
-					tgt.at<int>(i, j) = checkValue(temp_img.at<int>(i, j));
+					tgt.at<uchar>(i, j) = checkValue(temp_img.at<uchar>(i, j));
 				}
 			}
 		}
-		cv_gray(tgt, temp_img);
+		tgt.copyTo(temp_img);
 	}
 }
