@@ -110,32 +110,32 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 					j >= x &&
 					j < (x + sx)
 				) {
-					int curr_pixel = temp_img.at<int>(i, j);
+					int curr_pixel = temp_img.at<uchar>(i, j);
 					cout << "curr_pixel = " << curr_pixel << endl;
 					if (curr_pixel < a) {
 						// cout << "sets a" << endl;
-						tgt.at<int>(i, j) = MINRGB;
+						tgt.at<uchar>(i, j) = MINRGB;
 					}
 					else if (curr_pixel > b) {
 						// cout << "sets b" << endl;
-						tgt.at<int>(i, j) = MAXRGB;
+						tgt.at<uchar>(i, j) = MAXRGB;
 					}
 					else {
 						// cout << "sets else" << endl;
 						int newVal = (curr_pixel - a) * (255 / (b - a));
-						tgt.at<int>(i, j) = checkValue(newVal);
+						tgt.at<uchar>(i, j) = checkValue(newVal);
 					}
 				}
 				else {
 					// cout << "sets not in roi" << endl;
-					int newVal = temp_img.at<int>(i, j);
-					tgt.at<int>(i, j) = checkValue(newVal);
+					int newVal = temp_img.at<uchar>(i, j);
+					tgt.at<uchar>(i, j) = checkValue(newVal);
 				}
 			}
 		}
 		// cout << "copies temp to tgt" << endl;
 		cout << "bout to copy to tempImg" << endl;
-		cv_gray(tgt, temp_img);
+		tgt.copyTo(temp_img);
 		cout << "copied at end" << endl;
 	}
 }
