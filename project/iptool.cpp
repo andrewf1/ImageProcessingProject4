@@ -71,6 +71,16 @@ int main (int argc, char** argv)
                     roi new_region = roi(x, y, sx, sy);
                     regions.push_back(new_region);
                 }
+                else if (func_name == "canny_edge") {
+                    pch = strtok(NULL, " ");
+                    int T1 = atoi(pch);
+                    pch = strtok(NULL, " ");
+                    int T2 = atoi(pch);
+                    roi new_region = roi(x, y, sx, sy);
+                    new_region.canny_T1 = T1;
+                    new_region.canny_T2 = T2;
+                    regions.push_back(new_region);            
+                }
                 else if (func_name == "comb_ops") {
                     // pch = strtok(NULL, " ");
                     // int color_thresh = atoi(pch);
@@ -101,6 +111,9 @@ int main (int argc, char** argv)
             // utility::RGBEdgeDetection(src, tgt, regions, outfile);
             // auto end = chrono::high_resolution_clock::now();
             // cout << "RGB Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+        }
+        else if (func_name == "canny_edge") {
+            utility::cv_canny_edge(I, I2, regions);
         }
         else if (func_name == "comb_ops") {
             // auto start = chrono::high_resolution_clock::now();

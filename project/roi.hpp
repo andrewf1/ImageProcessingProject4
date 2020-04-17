@@ -18,6 +18,7 @@ public:
     int sx;
     int sy;
     int a, b; // histogram stretching
+    int canny_T1, canny_T2; // canny edge detection
 };
 
 #endif

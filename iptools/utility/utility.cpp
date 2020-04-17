@@ -86,21 +86,17 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
-	// allocating the memory for the target/temp images
 	Mat temp_img;
 	cv_gray(src, temp_img);
 	tgt = temp_img.clone();
-	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
-		// cout << "in regions loop" << endl;
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
 		int a = regions.at(r).a;
 		int b = regions.at(r).b;
-		// cout << "sets regions var info" << endl;
 		
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
@@ -112,55 +108,41 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
 				) {
 					int curr_pixel = temp_img.at<uchar>(i, j);
 					if (curr_pixel < a) {
-						// cout << "sets a" << endl;
 						tgt.at<uchar>(i, j) = MINRGB;
 					}
 					else if (curr_pixel > b) {
-						// cout << "sets b" << endl;
 						tgt.at<uchar>(i, j) = MAXRGB;
 					}
 					else {
-						// cout << "sets else" << endl;
 						int newVal = (curr_pixel - a) * (255 / (b - a));
 						tgt.at<uchar>(i, j) = checkValue(newVal);
 					}
 				}
 				else {
-					// cout << "sets not in roi" << endl;
 					int newVal = temp_img.at<uchar>(i, j);
 					tgt.at<uchar>(i, j) = checkValue(newVal);
 				}
 			}
 		}
-		// cout << "copies temp to tgt" << endl;
 		tgt.copyTo(temp_img);
 	}
 }
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
-	// cout << "in cv_hist_eq" << endl;
 	Mat temp_img;
-	// cout << "src->temp_img" << endl;
 	cv_gray(src, temp_img);
-	// cout << "src->temp_img" << endl;
 	tgt = temp_img.clone();
 
 	Mat eq_tgt;
-	// cout << "clone tgt to eqtgt" << endl;
 	eq_tgt = tgt.clone();
-	// cout << "clone tgt to eqtgt" << endl;
-	// cout << "calling eqHist" << endl;
 	equalizeHist(temp_img, eq_tgt);
-	// cout << "done with eqHist" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
-		// cout << "in regions loop" << endl;
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
-		// cout << "sets regions var info" << endl;
 		
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
@@ -177,8 +159,44 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 				}
 			}
 		}
-		cout << "bout to copy" << endl;
 		tgt.copyTo(temp_img);
-		cout << "copied" << endl;
+	}
+}
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
+	Mat temp_img;
+	cv_gray(src, temp_img);
+	tgt = temp_img.clone();
+
+	for (int r = 0; r < regions.size(); r++) {
+		int x = regions.at(r).x;
+		int y = regions.at(r).y;
+		int sx = regions.at(r).sx;
+		int sy = regions.at(r).sy;
+		int T1 = regions.at(r).canny_T1;
+		int T2 = regions.at(r).canny_T2;
+
+		// creating canny edge detected image using parameters for ROI
+		Mat canny_tgt;
+		canny_tgt = tgt.clone();
+		Canny(temp_img, canny_tgt, T1, T2);
+
+		for (int i = 0; i < temp_img.rows; i++) {
+			for (int j = 0; j < temp_img.cols; j++) {
+				if (
+					i >= y &&
+					i < (y + sy) &&
+					j >= x &&
+					j < (x + sx)					
+				) {
+					tgt.at<uchar>(i, j) = checkValue(canny_tgt.at<uchar>(i, j));
+				}
+				else {
+					tgt.at<uchar>(i, j) = checkValue(temp_img.at<uchar>(i, j));
+				}
+			}
+		}
+		tgt.copyTo(temp_img);
 	}
 }
