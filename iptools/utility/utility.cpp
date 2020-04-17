@@ -89,7 +89,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 	// allocating the memory for the target/temp images
 	Mat temp_img;
 	cv_gray(src, temp_img);
-	src.copyTo(tgt);
+	tgt.create(src.size(), src.type());
 	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
@@ -111,7 +111,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 					j < (x + sx)
 				) {
 					int curr_pixel = temp_img.at<int>(i, j);
-					// cout << "curr_pixel = " << curr_pixel << endl;
+					cout << "curr_pixel = " << curr_pixel << endl;
 					if (curr_pixel < a) {
 						// cout << "sets a" << endl;
 						tgt.at<int>(i, j) = MINRGB;
