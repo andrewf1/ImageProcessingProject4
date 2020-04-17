@@ -24,8 +24,6 @@ int main (int argc, char** argv)
         pch = strtok(str, " ");
         string src_name = pch;
         cv::Mat I = cv::imread(src_name);
-        cv::Mat I2;
-
 
         if (I.empty()) {
             cout << "Could not open or find the image: " << src_name << endl;
