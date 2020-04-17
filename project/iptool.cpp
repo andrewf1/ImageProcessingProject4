@@ -113,7 +113,9 @@ int main (int argc, char** argv)
             exit(1);
         }
 
+        cout << "bout to write to " << outfile << endl;
         cv::imwrite(outfile, I2);
+        cout << "just wrote there" << endl;
     }
 
     fclose(fp);

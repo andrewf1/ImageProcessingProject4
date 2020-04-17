@@ -139,6 +139,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
+	cout << "in cv_hist_eq" << endl;
 	Mat temp_img;
 	cv_gray(src, temp_img);
 	tgt = temp_img.clone();
