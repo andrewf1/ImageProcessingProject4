@@ -89,7 +89,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions, ch
 	// allocating the memory for the target/temp images
 	Mat temp_img;
 	cv_gray(src, temp_img);
-	tgt.create(I.size(), I.type());
+	tgt.create(src.size(), src.type());
 	// cout << "copied src to temp_img" << endl;
 
 	for (int r = 0; r < regions.size(); r++) {
