@@ -133,6 +133,6 @@ void utility::cv_hist_mod(Mat &src, Mat &tgt, const vector<roi>& regions, char* 
 			}
 		}
 		// cout << "copies temp to tgt" << endl;
-		tgt.copyTo(temp_img);
+		tgt = temp_img.clone();
 	}
 }
