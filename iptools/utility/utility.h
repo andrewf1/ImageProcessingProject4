@@ -22,7 +22,7 @@ class utility
 		static void scale(image &src, image &tgt, float ratio);
 		static void cv_gray(cv::Mat &src, cv::Mat &tgt);
 		static void cv_avgblur(cv::Mat &src, cv::Mat &tgt, int WindowSize);
-		static void cv_hist_mod(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile);
+		static void cv_hist_stretch(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile);
 };
 
 #endif

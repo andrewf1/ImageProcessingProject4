@@ -1,2 +1,2 @@
-slope.pgm slope_hist_stretch.pgm hist_mod 1
+slope.pgm slope_hist_stretch.pgm hist_stretch 1
 0 0 800 534 100 200

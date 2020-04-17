@@ -56,7 +56,7 @@ int main (int argc, char** argv)
                 pch = strtok(NULL, " ");
                 int sy = atoi(pch);
 
-                if (func_name == "hist_mod") {
+                if (func_name == "hist_stretch") {
                     pch = strtok(NULL, " ");
                     int a = atoi(pch);
                     pch = strtok(NULL, " ");
@@ -94,9 +94,9 @@ int main (int argc, char** argv)
         }
 
         // actually calling all the functions
-        if (func_name == "hist_mod") {
+        if (func_name == "hist_stretch") {
             // auto start = chrono::high_resolution_clock::now();
-            utility::cv_hist_mod(I, I2, regions, outfile);
+            utility::cv_hist_stretch(I, I2, regions, outfile);
             // auto end = chrono::high_resolution_clock::now();
             // cout << "Gray Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
