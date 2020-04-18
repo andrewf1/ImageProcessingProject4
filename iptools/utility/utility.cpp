@@ -258,36 +258,36 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_comb_ops(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
-	Mat temp_img;
-	cv_gray(src, temp_img);
-	tgt = temp_img.clone();
+	// Mat temp_img;
+	// cv_gray(src, temp_img);
+	// tgt = temp_img.clone();
 	
-	Mat hist_eq_img, sobel_img, canny_img;
-	equalizeHist(temp_img, hist_eq_img);
-	Canny(hist_eq_img, canny_img, T1, T2);
+	// Mat hist_eq_img, sobel_img, canny_img;
+	// equalizeHist(temp_img, hist_eq_img);
+	// Canny(hist_eq_img, canny_img, T1, T2);
 
-	for (int r = 0; r < regions.size(); r++) {
-		int x = regions.at(r).x;
-		int y = regions.at(r).y;
-		int sx = regions.at(r).sx;
-		int sy = regions.at(r).sy;
-		int T1 = regions.at(r).canny_T1;
-		int T2 = regions.at(r).canny_T2;
+	// for (int r = 0; r < regions.size(); r++) {
+	// 	int x = regions.at(r).x;
+	// 	int y = regions.at(r).y;
+	// 	int sx = regions.at(r).sx;
+	// 	int sy = regions.at(r).sy;
+	// 	int T1 = regions.at(r).canny_T1;
+	// 	int T2 = regions.at(r).canny_T2;
 
-		for (int i = 0; i < temp_img.rows; i++) {
-			for (int j = 0; j < temp_img.cols; j++) {
-				if (
-					i >= y &&
-					i < (y + sy) &&
-					j >= x &&
-					j < (x + sx)
-				) {
-					Mat
-					Canny(hist_eq_img, canny_img, T1, T2);
-				}
-				else {
+	// 	for (int i = 0; i < temp_img.rows; i++) {
+	// 		for (int j = 0; j < temp_img.cols; j++) {
+	// 			if (
+	// 				i >= y &&
+	// 				i < (y + sy) &&
+	// 				j >= x &&
+	// 				j < (x + sx)
+	// 			) {
+	// 				Mat
+	// 				Canny(hist_eq_img, canny_img, T1, T2);
+	// 			}
+	// 			else {
 
-				}
-			}
-		}	
+	// 			}
+	// 		}
+	// 	}	
 }
