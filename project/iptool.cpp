@@ -132,7 +132,7 @@ int main (int argc, char** argv)
         }
         else if (func_name == "comb_ops") {
             // auto start = chrono::high_resolution_clock::now();
-            utility::cv_comb_ops(I, I2, regions);
+            // utility::cv_comb_ops(I, I2, regions);
             // auto end = chrono::high_resolution_clock::now();
             // cout << "HSI Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
