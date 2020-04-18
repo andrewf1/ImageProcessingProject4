@@ -19,6 +19,7 @@ public:
     int sy;
     int a, b; // histogram stretching
     int canny_T1, canny_T2; // canny edge detection
+    int sobel_T; // sobel edge detection
 };
 
 #endif

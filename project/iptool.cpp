@@ -82,18 +82,21 @@ int main (int argc, char** argv)
                     regions.push_back(new_region);            
                 }
                 else if (func_name == "sobel_edge") {
+                    pch = strtok(NULL, " ");
+                    int T = atoi(pch);
                     roi new_region = roi(x, y, sx, sy);
+                    new_region.sobel_T = T;
                     regions.push_back(new_region);
                 }
                 else if (func_name == "comb_ops") {
-                    // pch = strtok(NULL, " ");
-                    // int color_thresh = atoi(pch);
-                    // pch = strtok(NULL, " ");
-                    // int color_direction = atoi(pch);
-                    // roi new_region = roi(x, y, sx, sy);
-                    // new_region.color_threshold = color_thresh;
-                    // new_region.color_direction = color_direction;
-                    // regions.push_back(new_region);                        
+                    pch = strtok(NULL, " ");
+                    int T1 = atoi(pch);
+                    pch = strtok(NULL, " ");
+                    int T2 = atoi(pch);
+                    roi new_region = roi(x, y, sx, sy);
+                    new_region.canny_T1 = T1;
+                    new_region.canny_T2 = T2;
+                    regions.push_back(new_region);                    
                 }
                 else {
                     cout << "ERROR: Function DNE" << endl;
@@ -125,11 +128,11 @@ int main (int argc, char** argv)
             // auto start = chrono::high_reoslution_clock::now();
             utility::cv_sobel_edge(I, I2, regions);
             // auto end = chrono::high_resolution_clock::now();
-            // cout << "Hist Eq time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            // cout << "Sobel Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "comb_ops") {
             // auto start = chrono::high_resolution_clock::now();
-            // utility::HSIEdgeDetection(src, tgt, regions, outfile);
+            utility::cv_comb_ops(I, I2, regions);
             // auto end = chrono::high_resolution_clock::now();
             // cout << "HSI Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }

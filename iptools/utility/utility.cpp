@@ -217,15 +217,62 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 	scale_dy = tgt.clone();
 	Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
 	Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
-	convertScaleAbs(dx_sobel, scale_dx);
-	convertScaleAbs(dy_sobel, scale_dy);
-	addWeighted(scale_dx, 0.5, scale_dy, 0.5, 0, sobel_tgt);
+	// convertScaleAbs(dx_sobel, scale_dx);
+	// convertScaleAbs(dy_sobel, scale_dy);
+	// addWeighted(scale_dx, 0.5, scale_dy, 0.5, 0, sobel_tgt);
 
 	for (int r = 0; r < regions.size(); r++) {
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
+		int T = regions.at(r).sobel_T;
+		for (int i = 0; i < temp_img.rows; i++) {
+			for (int j = 0; j < temp_img.cols; j++) {
+				if (
+					i >= y &&
+					i < (y + sy) &&
+					j >= x &&
+					j < (x + sx)
+				) {
+					double gx = dx_sobel.at<uchar>(i - y, j - x) / 8;
+					double gy = dy_sobel.at<uchar>(i - y, j - x) / 8;
+
+					double magnitude = sqrt(pow(gx, 2) + (pow(gy, 2)));
+
+					if (magnitude < T) {
+						tgt.at<uchar>(i, j) = MINRGB;
+					}
+					else {
+						tgt.at<uchar>(i, j) = MAXRGB;
+					}
+				}
+				else {
+					tgt.at<uchar>(i, j) = checkValue(temp_img.at<uchar>(i, j));
+				}	
+			}
+		}
+		tgt.copyTo(temp_img);
+	}
+}
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_comb_ops(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
+	Mat temp_img;
+	cv_gray(src, temp_img);
+	tgt = temp_img.clone();
+	
+	Mat hist_eq_img, sobel_img, canny_img;
+	equalizeHist(temp_img, hist_eq_img);
+	Canny(hist_eq_img, canny_img, T1, T2);
+
+	for (int r = 0; r < regions.size(); r++) {
+		int x = regions.at(r).x;
+		int y = regions.at(r).y;
+		int sx = regions.at(r).sx;
+		int sy = regions.at(r).sy;
+		int T1 = regions.at(r).canny_T1;
+		int T2 = regions.at(r).canny_T2;
 
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
@@ -235,13 +282,12 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 					j >= x &&
 					j < (x + sx)
 				) {
-					tgt.at<uchar>(i, j) = checkValue(sobel_tgt.at<uchar>(i, j));
+					Mat
+					Canny(hist_eq_img, canny_img, T1, T2);
 				}
 				else {
-					tgt.at<uchar>(i, j) = checkValue(temp_img.at<uchar>(i, j));
-				}	
+
+				}
 			}
-		}
-		tgt.copyTo(temp_img);
-	}
+		}	
 }
