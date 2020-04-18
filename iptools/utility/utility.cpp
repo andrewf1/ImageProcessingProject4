@@ -206,11 +206,20 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 	Mat temp_img;
 	cv_gray(src, temp_img);
 	tgt = temp_img.clone();
-	int ddepth = CV_16S; //try -1 or CV_16S 
+	int ddepth = CV_16U;
+	int ksize = 3;
 
-	Mat sobel_tgt;
+	Mat sobel_tgt, dx_sobel, dy_sobel, scale_dx, scale_dy;
 	sobel_tgt = tgt.clone();
-	Sobel(temp_img, sobel_tgt, ddepth, 1, 1);
+	dx_sobel = tgt.clone();
+	dy_sobel = tgt.clone();
+	scale_dx = tgt.clone();
+	scale_dy = tgt.clone();
+	Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
+	Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
+	convertScaleAbs(dx_sobel, scale_dx);
+	convertScaleAbs(dy_sobel, scale_dy);
+	addWeighted(scale_dx, 0.5, scale_dy, 0.5, 0, sobel_tgt);
 
 	for (int r = 0; r < regions.size(); r++) {
 		int x = regions.at(r).x;
@@ -224,13 +233,13 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 					i >= y &&
 					i < (y + sy) &&
 					j >= x &&
-					j < (x + sx)					
+					j < (x + sx)
 				) {
 					tgt.at<uchar>(i, j) = checkValue(sobel_tgt.at<uchar>(i, j));
 				}
 				else {
 					tgt.at<uchar>(i, j) = checkValue(temp_img.at<uchar>(i, j));
-				}				
+				}	
 			}
 		}
 		tgt.copyTo(temp_img);

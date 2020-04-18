@@ -104,23 +104,28 @@ int main (int argc, char** argv)
 
         // actually calling all the functions
         if (func_name == "hist_stretch") {
-            // auto start = chrono::high_resolution_clock::now();
+            auto start = chrono::high_resolution_clock::now();
             utility::cv_hist_stretch(I, I2, regions);
-            // auto end = chrono::high_resolution_clock::now();
-            // cout << "Gray Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            auto end = chrono::high_resolution_clock::now();
+            cout << "Hist Stretch time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "hist_eq") {
+            auto start = chrono::high_resolution_clock::now();
             utility::cv_hist_eq(I, I2, regions);
-            // auto start = chrono::high_resolution_clock::now();
-            // utility::RGBEdgeDetection(src, tgt, regions, outfile);
-            // auto end = chrono::high_resolution_clock::now();
-            // cout << "RGB Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            auto end = chrono::high_resolution_clock::now();
+            cout << "Hist Eq time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "canny_edge") {
+            auto start = chrono::high_resolution_clock::now();
             utility::cv_canny_edge(I, I2, regions);
+            auto end = chrono::high_resolution_clock::now();
+            cout << "Canny Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "sobel_edge") {
+            // auto start = chrono::high_reoslution_clock::now();
             utility::cv_sobel_edge(I, I2, regions);
+            // auto end = chrono::high_resolution_clock::now();
+            // cout << "Hist Eq time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "comb_ops") {
             // auto start = chrono::high_resolution_clock::now();
