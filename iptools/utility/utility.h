@@ -25,6 +25,7 @@ class utility
 		static void cv_hist_stretch(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions);
 		static void cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions);
 		static void cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions);
+		static void cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions);
 };
 
 #endif

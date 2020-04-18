@@ -200,3 +200,39 @@ void utility::cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 		tgt.copyTo(temp_img);
 	}
 }
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
+	Mat temp_img;
+	cv_gray(src, temp_img);
+	tgt = temp_img.clone();
+	int ddepth = -1; //CV_16S
+
+	Mat sobel_tgt;
+	sobel_tgt = tgt.clone();
+	Sobel(temp_img, sobel_tgt, ddepth, 1, 1);
+
+	for (int r = 0; r < regions.size(); r++) {
+		int x = regions.at(r).x;
+		int y = regions.at(r).y;
+		int sx = regions.at(r).sx;
+		int sy = regions.at(r).sy;
+
+		for (int i = 0; i < temp_img.rows; i++) {
+			for (int j = 0; j < temp_img.cols; j++) {
+				if (
+					i >= y &&
+					i < (y + sy) &&
+					j >= x &&
+					j < (x + sx)					
+				) {
+					tgt.at<uchar>(i, j) = checkValue(sobel_tgt.at<uchar>(i, j));
+				}
+				else {
+					tgt.at<uchar>(i, j) = checkValue(temp_img.at<uchar>(i, j));
+				}				
+			}
+		}
+		tgt.copyTo(temp_img);
+	}
+}
