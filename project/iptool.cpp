@@ -81,6 +81,10 @@ int main (int argc, char** argv)
                     new_region.canny_T2 = T2;
                     regions.push_back(new_region);            
                 }
+                else if (func_name == "sobel_edge") {
+                    roi new_region = roi(x, y, sx, sy);
+                    regions.push_back(new_region);
+                }
                 else if (func_name == "comb_ops") {
                     // pch = strtok(NULL, " ");
                     // int color_thresh = atoi(pch);
@@ -114,6 +118,9 @@ int main (int argc, char** argv)
         }
         else if (func_name == "canny_edge") {
             utility::cv_canny_edge(I, I2, regions);
+        }
+        else if (func_name == "sobel_edge") {
+            utility::cv_sobel_edge(I, I2, regions);
         }
         else if (func_name == "comb_ops") {
             // auto start = chrono::high_resolution_clock::now();
