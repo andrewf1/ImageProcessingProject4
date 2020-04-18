@@ -206,7 +206,7 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 	Mat temp_img;
 	cv_gray(src, temp_img);
 	tgt = temp_img.clone();
-	int ddepth = -1; //CV_16S
+	int ddepth = CV_16S; //try -1 or CV_16S 
 
 	Mat sobel_tgt;
 	sobel_tgt = tgt.clone();
