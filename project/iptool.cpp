@@ -45,6 +45,7 @@ int main (int argc, char** argv)
             exit(1);
         }
 
+        // creating ROI objects
         vector<roi> regions;
         for (int i = 0; i < num_regions; i++) {
             if (fgets(str, MAXLEN, fp) != NULL) {
@@ -88,7 +89,14 @@ int main (int argc, char** argv)
                     new_region.sobel_T = T;
                     regions.push_back(new_region);
                 }
-                else if (func_name == "comb_ops") {
+                else if (func_name == "comb_ops_sobel") {
+                    pch = strtok(NULL, " ");
+                    int T = atoi(pch);
+                    roi new_region = roi(x, y, sx, sy);
+                    new_region.sobel_T = T;
+                    regions.push_back(new_region);                    
+                }
+                else if (func_name == "comb_ops_canny") {
                     pch = strtok(NULL, " ");
                     int T1 = atoi(pch);
                     pch = strtok(NULL, " ");
@@ -96,7 +104,7 @@ int main (int argc, char** argv)
                     roi new_region = roi(x, y, sx, sy);
                     new_region.canny_T1 = T1;
                     new_region.canny_T2 = T2;
-                    regions.push_back(new_region);                    
+                    regions.push_back(new_region);                     
                 }
                 else {
                     cout << "ERROR: Function DNE" << endl;
@@ -125,25 +133,29 @@ int main (int argc, char** argv)
             cout << "Canny Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "sobel_edge") {
-            // auto start = chrono::high_reoslution_clock::now();
+            auto start = chrono::high_reoslution_clock::now();
             utility::cv_sobel_edge(I, I2, regions);
-            // auto end = chrono::high_resolution_clock::now();
-            // cout << "Sobel Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            auto end = chrono::high_resolution_clock::now();
+            cout << "Sobel Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
-        else if (func_name == "comb_ops") {
+        else if (func_name == "comb_ops_sobel") {
             // auto start = chrono::high_resolution_clock::now();
-            // utility::cv_comb_ops(I, I2, regions);
+            utility::cv_comb_ops_sobel(I, I2, regions, outfile);
             // auto end = chrono::high_resolution_clock::now();
-            // cout << "HSI Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            // cout << "Combine Ops for HE and Sobel ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+        }
+        else if (func_name == "comb_ops_canny") {
+            // auto start = chrono::high_resolution_clock::now();
+            // utility::cv_comb_ops_canny(I, I2, regions, outfile);
+            // auto end = chrono::high_resolution_clock::now();
+            // cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else {
             cout << "ERROR: Function DNE" << endl;
             exit(1);
         }
 
-        cout << "bout to write to " << outfile << endl;
         cv::imwrite(outfile, I2);
-        cout << "just wrote there" << endl;
     }
 
     fclose(fp);

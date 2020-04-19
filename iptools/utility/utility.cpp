@@ -255,37 +255,18 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 }
 
 /*-----------------------------------------------------------------------**/
-void utility::cv_comb_ops(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
-	// Mat temp_img;
-	// cv_gray(src, temp_img);
-	// tgt = temp_img.clone();
+void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile) {
+	Mat temp_img;
+	cv_gray(src, temp_img);
 	
-	// Mat hist_eq_img, sobel_img, canny_img;
-	// equalizeHist(temp_img, hist_eq_img);
-	// Canny(hist_eq_img, canny_img, T1, T2);
+	Mat hist_eq_img, sobel_eqd_img;
+	utility::cv_hist_eq(temp_img, hist_eq_img, regions);
+	utility::cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
-	// for (int r = 0; r < regions.size(); r++) {
-	// 	int x = regions.at(r).x;
-	// 	int y = regions.at(r).y;
-	// 	int sx = regions.at(r).sx;
-	// 	int sy = regions.at(r).sy;
-	// 	int T1 = regions.at(r).canny_T1;
-	// 	int T2 = regions.at(r).canny_T2;
+	Mat diff_img = sobel_eqd_img - hist_eq_img;
 
-	// 	for (int i = 0; i < temp_img.rows; i++) {
-	// 		for (int j = 0; j < temp_img.cols; j++) {
-	// 			if (
-	// 				i >= y &&
-	// 				i < (y + sy) &&
-	// 				j >= x &&
-	// 				j < (x + sx)
-	// 			) {
-	// 				Mat
-	// 				Canny(hist_eq_img, canny_img, T1, T2);
-	// 			}
-	// 			else {
+	tgt = sobel_eqd_img.clone();
 
-	// 			}
-	// 		}
-	// 	}	
+	char diff_img_name[100] = "diff_img_";
+	imwrite(strcat(diff_img_name, outfile), diff_img);
 }

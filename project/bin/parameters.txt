@@ -6,3 +6,5 @@ baboon.pgm baboon_canny.pgm canny_edge 1
 0 0 300 300 200 300
 baboon.pgm baboon_sobel.pgm sobel_edge 1
 0 0 300 300 20
+slope.pgm slope_comb_ops_sobel.pgm comb_ops_sobel 1
+0 0 800 534 20
