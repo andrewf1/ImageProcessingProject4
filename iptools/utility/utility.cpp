@@ -213,12 +213,12 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 
 	Mat sobel_tgt, dx_sobel, dy_sobel, scale_dx, scale_dy;
 	sobel_tgt = tgt.clone();
-	dx_sobel = tgt.clone();
-	dy_sobel = tgt.clone();
-	scale_dx = tgt.clone();
-	scale_dy = tgt.clone();
-	Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
-	Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
+	// dx_sobel = tgt.clone();
+	// dy_sobel = tgt.clone();
+	// scale_dx = tgt.clone();
+	// scale_dy = tgt.clone();
+	// Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
+	// Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
 	// convertScaleAbs(dx_sobel, scale_dx);
 	// convertScaleAbs(dy_sobel, scale_dy);
 	// addWeighted(scale_dx, 0.5, scale_dy, 0.5, 0, sobel_tgt);
@@ -229,6 +229,13 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 		int sx = regions.at(r).sx;
 		int sy = regions.at(r).sy;
 		int T = regions.at(r).sobel_T;
+
+		dx_sobel = temp_img(Rect(x, y, sx, sy));
+		dy_sobel = temp_img(Rect(x, y, sx, sy));
+
+		Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
+		Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
+
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
 				if (
