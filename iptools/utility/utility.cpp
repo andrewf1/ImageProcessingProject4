@@ -233,11 +233,10 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 					j >= x &&
 					j < (x + sx)
 				) {
-					uchar gx = dx_sobel.at<uchar>(i - y, j - x) / 8;
-					uchar gy = dy_sobel.at<uchar>(i - y, j - x) / 8;
+					double gx = dx_sobel.at<uchar>(i - y, j - x) / 8;
+					double gy = dy_sobel.at<uchar>(i - y, j - x) / 8;
 
-					uchar magnitude = sqrt(pow(gx, 2) + (pow(gy, 2)));
-					cout << "mag = " << (int)magnitude << endl;
+					double magnitude = sqrt(pow(gx, 2) + (pow(gy, 2)));
 
 					if (magnitude < T) {
 						tgt.at<uchar>(i, j) = MINRGB;
