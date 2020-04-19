@@ -205,7 +205,8 @@ void utility::cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
 	cv_gray(src, temp_img);
-	tgt = temp_img.clone();
+	temp_img.copyTo(tgt);
+	// tgt = temp_img.clone();
 
 	// params for Sobel OpenCV Function
 	int ddepth = -1;
