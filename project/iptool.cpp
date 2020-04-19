@@ -106,6 +106,9 @@ int main (int argc, char** argv)
                     new_region.canny_T2 = T2;
                     regions.push_back(new_region);                     
                 }
+                else if (func_name == "qr_decode") {
+                    continue;
+                }
                 else {
                     cout << "ERROR: Function DNE" << endl;
                     exit(1);
