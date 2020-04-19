@@ -5,4 +5,4 @@ slope.pgm slope_hist_eq.pgm hist_eq 1
 baboon.pgm baboon_canny.pgm canny_edge 1
 0 0 300 300 200 300
 baboon.pgm baboon_sobel.pgm sobel_edge 1
-0 0 300 300 15
+0 0 300 300 20
