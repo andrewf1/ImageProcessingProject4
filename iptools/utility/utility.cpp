@@ -260,7 +260,9 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	cv_gray(src, temp_img);
 	
 	Mat hist_eq_img, sobel_eqd_img;
+	cout << "calling cv_hist_eq" << endl;
 	cv_hist_eq(temp_img, hist_eq_img, regions);
+	cout << "calling cv_sobel_edge" << endl;
 	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
 	Mat diff_img = sobel_eqd_img - hist_eq_img;
