@@ -206,6 +206,8 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 	Mat temp_img;
 	cv_gray(src, temp_img);
 	tgt = temp_img.clone();
+
+	// params for Sobel OpenCV Function
 	int ddepth = CV_16U;
 	int ksize = 3;
 
@@ -235,8 +237,8 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 					j >= x &&
 					j < (x + sx)
 				) {
-					uchar gx = dx_sobel.at<uchar>(i, j);
-					uchar gy = dy_sobel.at<uchar>(i, j);
+					uchar gx = dx_sobel.at<uchar>(i - x, j - y) / 8;
+					uchar gy = dy_sobel.at<uchar>(i - x, j - y) / 8;
 
 					uchar magnitude = sqrt(pow(gx, 2) + (pow(gy, 2)));
 					cout << "mag = " << (int)magnitude << endl;
