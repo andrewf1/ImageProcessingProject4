@@ -260,13 +260,13 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	cv_gray(src, temp_img);
 	
 	Mat hist_eq_img, sobel_eqd_img;
-	utility::cv_hist_eq(temp_img, hist_eq_img, regions);
-	utility::cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
+	cv_hist_eq(temp_img, hist_eq_img, regions);
+	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
 	Mat diff_img = sobel_eqd_img - hist_eq_img;
 
 	tgt = sobel_eqd_img.clone();
 
-	char diff_img_name[100] = "diff_img_";
-	imwrite(strcat(diff_img_name, outfile), diff_img);
+	// char diff_img_name[100] = "diff_img_";
+	// imwrite(strcat(diff_img_name, outfile), diff_img);
 }
