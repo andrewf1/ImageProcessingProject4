@@ -258,9 +258,8 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile) {
 	Mat hist_eq_img, sobel_eqd_img;
 	src.copyTo(hist_eq_img);
-	cout << "calling cv_hist_eq" << endl;
+	src.copyTo(sobel_eqd_img);
 	cv_hist_eq(src, hist_eq_img, regions);
-	cout << "calling cv_sobel_edge" << endl;
 	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
 	Mat diff_img = sobel_eqd_img - hist_eq_img;
