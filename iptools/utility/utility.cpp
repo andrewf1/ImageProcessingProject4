@@ -274,3 +274,15 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	// char diff_img_name[100] = "diff_img_";
 	// imwrite(strcat(diff_img_name, outfile), diff_img);
 }
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt) {
+	cv_gray(src, src);
+	equalizeHist(src, src);
+
+	QRCodeDetector qrd = QRCodeDetector();
+
+	cout << "QR Message Decoded: " << qrd.detectAndDecode(src) << endl;
+
+	src.copyTo(tgt);
+}
