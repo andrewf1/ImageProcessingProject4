@@ -133,7 +133,7 @@ int main (int argc, char** argv)
             cout << "Canny Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "sobel_edge") {
-            auto start = chrono::high_reoslution_clock::now();
+            auto start = chrono::high_resolution_clock::now();
             utility::cv_sobel_edge(I, I2, regions);
             auto end = chrono::high_resolution_clock::now();
             cout << "Sobel Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
