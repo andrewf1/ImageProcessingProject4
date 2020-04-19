@@ -256,12 +256,10 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile) {
-	Mat temp_img;
-	cv_gray(src, temp_img);
-	
 	Mat hist_eq_img, sobel_eqd_img;
+	src.copyTo(hist_eq_img);
 	cout << "calling cv_hist_eq" << endl;
-	cv_hist_eq(temp_img, hist_eq_img, regions);
+	cv_hist_eq(src, hist_eq_img, regions);
 	cout << "calling cv_sobel_edge" << endl;
 	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
