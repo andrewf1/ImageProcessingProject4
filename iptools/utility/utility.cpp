@@ -233,8 +233,8 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 		dx_sobel = temp_img(Rect(x, y, sx, sy));
 		dy_sobel = temp_img(Rect(x, y, sx, sy));
 
-		Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
-		Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
+		Sobel(temp_img, dx_sobel, -1, 1, 0, ksize);
+		Sobel(temp_img, dy_sobel, -1, 0, 1, ksize);
 
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
