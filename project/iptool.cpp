@@ -108,6 +108,7 @@ int main (int argc, char** argv)
                     regions.push_back(new_region);                     
                 }
                 else if (func_name == "qr_decode") {
+                    cout << "in qr_decode" << endl;
                     continue;
                 }
                 else {
