@@ -24,9 +24,6 @@ int main (int argc, char** argv)
         pch = strtok(str, " ");
         string src_name = pch;
         cv::Mat I = cv::imread(src_name);
-        cout << src_name << endl;
-        utility::cv_gray(I, I);
-        cout << "out of cv_gray for " << src_name << endl;
         cv::Mat I2;
 
         if (I.empty()) {
@@ -34,6 +31,10 @@ int main (int argc, char** argv)
             exit(1);
         }
 
+        cout << src_name << endl;
+        utility::cv_gray(I, I);
+        cout << "out of cv_gray for " << src_name << endl;
+        
         pch = strtok(NULL, " ");
         strcpy(outfile, pch);
 
