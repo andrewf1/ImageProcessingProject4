@@ -23,6 +23,7 @@ int main (int argc, char** argv)
     while (fgets(str, MAXLEN, fp) != NULL) {
         pch = strtok(str, " ");
         string src_name = pch;
+        cout << "file = " << src_name << endl;
         cv::Mat I = cv::imread(src_name);
         cv::Mat I2;
 
