@@ -143,7 +143,10 @@ int main (int argc, char** argv)
         }
         else if (func_name == "comb_ops_sobel") {
             // auto start = chrono::high_resolution_clock::now();
-            utility::cv_comb_ops_sobel(I, I2, regions, outfile);
+            // utility::cv_comb_ops_sobel(I, I2, regions, outfile);
+            utility::cv_hist_eq(I, I2, regions);
+            I2.copyTo(I);
+            utility::cv_sobel_edge(I, I2, regions);
             // auto end = chrono::high_resolution_clock::now();
             // cout << "Combine Ops for HE and Sobel ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
