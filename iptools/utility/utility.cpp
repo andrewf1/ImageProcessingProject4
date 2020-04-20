@@ -287,7 +287,6 @@ void utility::cv_comb_ops_canny(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 /*-----------------------------------------------------------------------**/
 void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt, char* outfile) {
 	cout << endl;
-	// cv_gray(src, src);
 	Mat src_hist_img;
 	equalizeHist(src, src_hist_img);
 
