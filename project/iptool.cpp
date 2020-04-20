@@ -154,7 +154,7 @@ int main (int argc, char** argv)
             // cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "qr_decode") {
-            utility::cv_qr_decode(I, I2);
+            utility::cv_qr_decode(I, I2, outfile);
             continue;
         }
         else {

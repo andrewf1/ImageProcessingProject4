@@ -28,7 +28,7 @@ class utility
 		static void cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions);
 		static void cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile);
 		static void cv_comb_ops_canny(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile);
-		static void cv_qr_decode(cv::Mat &src, cv::Mat &tgt);
+		static void cv_qr_decode(cv::Mat &src, cv::Mat &tgt, char* outfile);
 };
 
 #endif
