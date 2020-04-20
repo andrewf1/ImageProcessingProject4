@@ -87,7 +87,7 @@ void utility::cv_avgblur(Mat &src, Mat &tgt, int WindowSize)
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
-	cv_gray(src, temp_img);
+	temp_img = src.clone();
 	tgt = temp_img.clone();
 
 	for (int r = 0; r < regions.size(); r++) {
@@ -131,7 +131,7 @@ void utility::cv_hist_stretch(Mat &src, Mat &tgt, const vector<roi>& regions) {
 /*-----------------------------------------------------------------------**/
 void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
-	cv_gray(src, temp_img);
+	temp_img = src.clone();
 	tgt = temp_img.clone();
 
 	Mat eq_tgt;
@@ -166,7 +166,7 @@ void utility::cv_hist_eq(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions)
 /*-----------------------------------------------------------------------**/
 void utility::cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
-	cv_gray(src, temp_img);
+	temp_img = src.clone();
 	tgt = temp_img.clone();
 
 	for (int r = 0; r < regions.size(); r++) {
@@ -205,7 +205,7 @@ void utility::cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
 	cout << "copy to temp_img" << endl;
-	cv_gray(src, temp_img);
+	temp_img = src.clone();
 	cout << "cloning temp_img" << endl;
 	tgt = temp_img.clone();
 	cout << "Done." << endl;
@@ -283,7 +283,7 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt, char* outfile) {
-	cv_gray(src, src);
+	// cv_gray(src, src);
 	Mat src_hist_img;
 	equalizeHist(src, src_hist_img);
 
