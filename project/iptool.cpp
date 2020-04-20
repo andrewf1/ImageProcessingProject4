@@ -154,7 +154,10 @@ int main (int argc, char** argv)
             // cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "qr_decode") {
+            auto start = chrono::high_resolution_clock::now();
             utility::cv_qr_decode(I, I2, outfile);
+            auto end = chrono::high_resolution_clock::now();
+            cout << "QR detection and decoding time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
             continue;
         }
         else {
