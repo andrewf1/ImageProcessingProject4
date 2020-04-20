@@ -169,13 +169,9 @@ int main (int argc, char** argv)
             exit(1);
         }
 
-        cout << "starting final imwrite" << endl;
         cv::imwrite(outfile, I2);
-        cout << "done with final imwrite" << endl;
     }
 
-    cout << "bout to close fp" << endl;
     fclose(fp);
-    cout << "closed fp" << endl;
     return 0;
 }

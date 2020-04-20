@@ -274,7 +274,7 @@ void utility::cv_comb_ops_canny(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	Mat hist_eq_img, canny_eqd_img;
 
 	cv_hist_eq(src, hist_eq_img, regions);
-	cv_sobel_edge(hist_eq_img, canny_eqd_img, regions);
+	cv_canny_edge(hist_eq_img, canny_eqd_img, regions);
 
 	Mat diff_img = hist_eq_img - canny_eqd_img;
 
@@ -286,6 +286,7 @@ void utility::cv_comb_ops_canny(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 
 /*-----------------------------------------------------------------------**/
 void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt, char* outfile) {
+	cout << endl;
 	// cv_gray(src, src);
 	Mat src_hist_img;
 	equalizeHist(src, src_hist_img);
@@ -302,4 +303,5 @@ void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt, char* outfile) {
 
 	char hist_qr_name[100] = "hist_";
 	imwrite(strcat(hist_qr_name, outfile), src_hist_img);
+	cout << endl;
 }
