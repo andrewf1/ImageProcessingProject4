@@ -273,12 +273,17 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	// cv_gray(hist_eq_img, sobel_eqd_img);
 	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
+	cout << "done with sobel edge" << endl;
+
 	Mat diff_img = sobel_eqd_img - hist_eq_img;
+	cout << "done with subtraction" << endl;
 
 	tgt = sobel_eqd_img.clone();
+	cout << "jsut cloned the tgt" << endl;
 
-	// char diff_img_name[100] = "diff_img_";
-	// imwrite(strcat(diff_img_name, outfile), diff_img);
+	char diff_img_name[100] = "diff_img_";
+	imwrite(strcat(diff_img_name, outfile), diff_img);
+	cout << "wrote the diff img" << endl;
 }
 
 /*-----------------------------------------------------------------------**/
