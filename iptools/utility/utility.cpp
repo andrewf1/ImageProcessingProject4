@@ -278,15 +278,19 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 /*-----------------------------------------------------------------------**/
 void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt, char* outfile) {
 	cv_gray(src, src);
-	Mat src_hist_img, points_detected, straight_code;
+	Mat src_hist_img;
 	equalizeHist(src, src_hist_img);
 
 	QRCodeDetector qrd = QRCodeDetector();
-	std::string msg = qrd.detectAndDecode(src, points_detected, straight_code);
-	cout << "QR Message Decoded: " << msg << endl;
+	std::string msg = qrd.detectAndDecode(src);
+	cout << "Original QR Message Decoded: " << msg << endl;
+
+	msg = qrd.detectAndDecode(src_hist_img);
+	if (msg.length() > 0)
+		cout << "Histogram Equalized QR Message Decoded: " << msg << endl;
+	else
+		cout << "Histogram Equalized QR Message Failed to be Decoded" << endl;
 
 	char hist_qr_name[100] = "hist_";
 	imwrite(strcat(hist_qr_name, outfile), src_hist_img);
-
-	src.copyTo(tgt);
 }
