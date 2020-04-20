@@ -177,6 +177,8 @@ int main (int argc, char** argv)
         cout << "done with final imwrite" << endl;
     }
 
+    cout << "bout to close fp" << endl;
     fclose(fp);
+    cout << "closed fp" << endl;
     return 0;
 }
