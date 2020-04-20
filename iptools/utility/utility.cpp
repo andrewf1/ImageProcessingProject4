@@ -282,7 +282,7 @@ void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt) {
 	equalizeHist(src, src_hist_img);
 
 	QRCodeDetector qrd = QRCodeDetector();
-	std::string msg = qrd.detectAndDecode(src_hist_img, points_detected, straight_code);
+	std::string msg = qrd.detectAndDecode(src, points_detected, straight_code);
 	cout << "QR Message Decoded: " << msg << endl;
 
 	src.copyTo(tgt);
