@@ -211,6 +211,7 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 	int ddepth = -1;
 	int ksize = 3;
 
+	cout << "entering regions" << endl;
 	for (int r = 0; r < regions.size(); r++) {
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
@@ -222,8 +223,10 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 		dx_sobel = temp_img(Rect(x, y, sx, sy));
 		dy_sobel = temp_img(Rect(x, y, sx, sy));
 
+		cout << "calling sobel" << endl;
 		Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
 		Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
+		cout << "done with sobel" << endl;
 
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
