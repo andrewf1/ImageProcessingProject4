@@ -287,7 +287,7 @@ void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt) {
 		return;
 	}
 
-	std::string msg = qrd.decode(hist_img_detect);
+	std::string msg = qrd.decode(hist_img, hist_img_detect);
 	cout << "QR Message Decoded: " << msg << endl;
 
 	src.copyTo(tgt);
