@@ -145,6 +145,7 @@ int main (int argc, char** argv)
         else if (func_name == "comb_ops_sobel") {
             // auto start = chrono::high_resolution_clock::now();
             utility::cv_comb_ops_sobel(I, I2, regions, outfile);
+            cout << "back from comb ops" << endl;
             // utility::cv_hist_eq(I, I2, regions);
             // I2.copyTo(I);
             // cout << "calling sobel edge in comb ops" << endl;
@@ -171,7 +172,9 @@ int main (int argc, char** argv)
             exit(1);
         }
 
+        cout << "starting final imwrite" << endl;
         cv::imwrite(outfile, I2);
+        cout << "done with final imwrite" << endl;
     }
 
     fclose(fp);
