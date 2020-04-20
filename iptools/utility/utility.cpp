@@ -261,7 +261,7 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	cv_hist_eq(src, hist_eq_img, regions);
 	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
-	Mat diff_img = hist_eq_img - sobel_eqd_img;
+	Mat diff_img = sobel_eqd_img - hist_eq_img;
 
 	tgt = sobel_eqd_img.clone();
 
@@ -276,7 +276,7 @@ void utility::cv_comb_ops_canny(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 	cv_hist_eq(src, hist_eq_img, regions);
 	cv_canny_edge(hist_eq_img, canny_eqd_img, regions);
 
-	Mat diff_img = hist_eq_img - canny_eqd_img;
+	Mat diff_img = canny_eqd_img - hist_eq_img;
 
 	tgt = canny_eqd_img.clone();
 
