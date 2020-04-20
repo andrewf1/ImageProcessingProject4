@@ -31,9 +31,7 @@ int main (int argc, char** argv)
             exit(1);
         }
 
-        cout << src_name << endl;
         utility::cv_gray(I, I);
-        cout << "out of cv_gray for " << src_name << endl;
 
         pch = strtok(NULL, " ");
         strcpy(outfile, pch);
