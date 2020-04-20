@@ -278,11 +278,17 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 /*-----------------------------------------------------------------------**/
 void utility::cv_qr_decode(cv::Mat &src, cv::Mat &tgt) {
 	cv_gray(src, src);
-	Mat hist_img;
+	Mat hist_img, hist_img_detect;
 	equalizeHist(src, hist_img);
 
 	QRCodeDetector qrd = QRCodeDetector();
-	cout << "QR Message Decoded: " << qrd.detectAndDecode(hist_img) << endl;
+	if (!qrd.detect(hist_img, hist_img_detect)) {
+		cout << "QR not detected!" << endl;
+		return;
+	}
+
+	std::string msg = qrd.decode(hist_img_detect);
+	cout << "QR Message Decoded: " << msg << endl;
 
 	src.copyTo(tgt);
 }
