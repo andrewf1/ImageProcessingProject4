@@ -9,4 +9,4 @@ baboon.pgm baboon_sobel.pgm sobel_edge 1
 qr_cap4401.png qr_cap4401.png qr_decode 0
 qr_stuff_paper.jpg qr_stuff_paper.jpg qr_decode 0
 qr_stuff_monitor.jpg qr_stuff_monitor.jpg qr_decode 0
-qr_wikipedia.org qr_wikipedia.org qr_decode 0
+qr_wikipedia.jpg qr_wikipedia.jpg qr_decode 0

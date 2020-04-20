@@ -23,7 +23,6 @@ int main (int argc, char** argv)
     while (fgets(str, MAXLEN, fp) != NULL) {
         pch = strtok(str, " ");
         string src_name = pch;
-        cout << "file = " << src_name << endl;
         cv::Mat I = cv::imread(src_name);
         cv::Mat I2;
 
@@ -108,7 +107,6 @@ int main (int argc, char** argv)
                     regions.push_back(new_region);                     
                 }
                 else if (func_name == "qr_decode") {
-                    cout << "suppoed to get region" << endl;
                     continue;
                 }
                 else {
@@ -156,10 +154,8 @@ int main (int argc, char** argv)
             // cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "qr_decode") {
-            cout << "calling cv_qr_decode" << endl;
             utility::cv_qr_decode(I, I2);
             continue;
-            cout << "if u see me, what u think is happening is not happening" << endl;
         }
         else {
             cout << "ERROR: Function DNE" << endl;
