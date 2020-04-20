@@ -275,7 +275,7 @@ void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& r
 
 	cout << "done with sobel edge" << endl;
 
-	Mat diff_img = sobel_eqd_img - hist_eq_img;
+	Mat diff_img = hist_eq_img - sobel_eqd_img;
 	cout << "done with subtraction" << endl;
 
 	tgt = sobel_eqd_img.clone();
