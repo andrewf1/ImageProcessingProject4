@@ -204,17 +204,13 @@ void utility::cv_canny_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 /*-----------------------------------------------------------------------**/
 void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions) {
 	Mat temp_img;
-	cout << "copy to temp_img" << endl;
 	temp_img = src.clone();
-	cout << "cloning temp_img" << endl;
 	tgt = temp_img.clone();
-	cout << "Done." << endl;
 
 	// params for Sobel OpenCV Function
 	int ddepth = -1;
 	int ksize = 3;
 
-	cout << "entering regions" << endl;
 	for (int r = 0; r < regions.size(); r++) {
 		int x = regions.at(r).x;
 		int y = regions.at(r).y;
@@ -226,10 +222,8 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 		dx_sobel = temp_img(Rect(x, y, sx, sy));
 		dy_sobel = temp_img(Rect(x, y, sx, sy));
 
-		cout << "calling sobel" << endl;
 		Sobel(temp_img, dx_sobel, ddepth, 1, 0, ksize);
 		Sobel(temp_img, dy_sobel, ddepth, 0, 1, ksize);
-		cout << "done with sobel" << endl;
 
 		for (int i = 0; i < temp_img.rows; i++) {
 			for (int j = 0; j < temp_img.cols; j++) {
@@ -264,26 +258,30 @@ void utility::cv_sobel_edge(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regio
 void utility::cv_comb_ops_sobel(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile) {
 	Mat hist_eq_img, sobel_eqd_img;
 
-	// cv_gray(src, src);
-	cout << "calling cv_hist_eq" << endl;
 	cv_hist_eq(src, hist_eq_img, regions);
-
-	cout << "calling cv_sobel_edge" << endl;
-	// cv_gray(hist_eq_img, hist_eq_img);
-	// cv_gray(hist_eq_img, sobel_eqd_img);
 	cv_sobel_edge(hist_eq_img, sobel_eqd_img, regions);
 
-	cout << "done with sobel edge" << endl;
-
 	Mat diff_img = hist_eq_img - sobel_eqd_img;
-	cout << "done with subtraction" << endl;
 
 	tgt = sobel_eqd_img.clone();
-	cout << "jsut cloned the tgt" << endl;
 
 	char diff_img_name[100] = "diff_img_";
 	imwrite(strcat(diff_img_name, outfile), diff_img);
-	cout << "wrote the diff img" << endl;
+}
+
+/*-----------------------------------------------------------------------**/
+void utility::cv_comb_ops_canny(cv::Mat &src, cv::Mat &tgt, const vector<roi>& regions, char* outfile) {
+	Mat hist_eq_img, canny_eqd_img;
+
+	cv_hist_eq(src, hist_eq_img, regions);
+	cv_sobel_edge(hist_eq_img, canny_eqd_img, regions);
+
+	Mat diff_img = hist_eq_img - canny_eqd_img;
+
+	tgt = canny_eqd_img.clone();
+
+	char diff_img_name[100] = "diff_img_";
+	imwrite(strcat(diff_img_name, outfile), diff_img);
 }
 
 /*-----------------------------------------------------------------------**/

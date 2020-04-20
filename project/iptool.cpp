@@ -34,7 +34,7 @@ int main (int argc, char** argv)
         cout << src_name << endl;
         utility::cv_gray(I, I);
         cout << "out of cv_gray for " << src_name << endl;
-        
+
         pch = strtok(NULL, " ");
         strcpy(outfile, pch);
 
@@ -111,7 +111,6 @@ int main (int argc, char** argv)
                     regions.push_back(new_region);                     
                 }
                 else if (func_name == "qr_decode") {
-                    cout << "in qr_decode" << endl;
                     continue;
                 }
                 else {
@@ -147,22 +146,16 @@ int main (int argc, char** argv)
             cout << "Sobel Edge time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "comb_ops_sobel") {
-            // auto start = chrono::high_resolution_clock::now();
+            auto start = chrono::high_resolution_clock::now();
             utility::cv_comb_ops_sobel(I, I2, regions, outfile);
-            cout << "back from comb ops" << endl;
-            // utility::cv_hist_eq(I, I2, regions);
-            // I2.copyTo(I);
-            // cout << "calling sobel edge in comb ops" << endl;
-            // utility::cv_sobel_edge(I, I2, regions);
-            // cout << "done with sobel" << endl;
-            // auto end = chrono::high_resolution_clock::now();
-            // cout << "Combine Ops for HE and Sobel ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            auto end = chrono::high_resolution_clock::now();
+            cout << "Combine Ops for HE and Sobel ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "comb_ops_canny") {
-            // auto start = chrono::high_resolution_clock::now();
-            // utility::cv_comb_ops_canny(I, I2, regions, outfile);
-            // auto end = chrono::high_resolution_clock::now();
-            // cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
+            auto start = chrono::high_resolution_clock::now();
+            utility::cv_comb_ops_canny(I, I2, regions, outfile);
+            auto end = chrono::high_resolution_clock::now();
+            cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "qr_decode") {
             auto start = chrono::high_resolution_clock::now();

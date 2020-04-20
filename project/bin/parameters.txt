@@ -8,6 +8,8 @@ baboon.pgm baboon_sobel.pgm sobel_edge 1
 0 0 300 300 20
 baboon.pgm baboon_comb_ops_sobel.pgm comb_ops_sobel 1
 0 0 300 300 20
+baboon.pgm baboon_comb_ops_canny.pgm comb_ops_canny 1
+0 0 300 300 200 300
 qr_cap4401.png qr_cap4401.png qr_decode 0
 qr_stuff_paper.jpg qr_stuff_paper.jpg qr_decode 0
 qr_stuff_monitor.jpg qr_stuff_monitor.jpg qr_decode 0
