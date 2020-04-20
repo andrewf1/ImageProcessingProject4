@@ -154,7 +154,10 @@ int main (int argc, char** argv)
             // cout << "Combine Ops for HE and Canny ED time for " << src_name << " = " << chrono::duration_cast<chrono::milliseconds>(end - start).count() << "ms" << endl;
         }
         else if (func_name == "qr_decode") {
+            cout << "calling cv_qr_decode" << endl;
             utility::cv_qr_decode(I, I2);
+            continue;
+            cout << "if u see me, what u think is happening is not happening" << endl;
         }
         else {
             cout << "ERROR: Function DNE" << endl;
