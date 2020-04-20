@@ -1,15 +1,41 @@
-slope.pgm slope_hist_stretch.pgm hist_stretch 1
-0 0 800 534 100 200
-slope.pgm slope_hist_eq.pgm hist_eq 1
-0 0 800 534
-baboon.pgm baboon_canny.pgm canny_edge 1
-0 0 300 300 200 300
-baboon.pgm baboon_sobel.pgm sobel_edge 1
-0 0 300 300 20
-baboon.pgm baboon_comb_ops_sobel.pgm comb_ops_sobel 1
-0 0 300 300 20
-baboon.pgm baboon_comb_ops_canny.pgm comb_ops_canny 1
-0 0 300 300 200 300
+floor.pgm floor_hist_stretch.pgm hist_stretch 2
+0 0 100 250 100 200
+400 0 100 300 50 100
+lena.pgm lena_hist_stretch.pgm hist_stretch 2
+0 0 200 200 100 200
+0 300 200 150 150 200
+floor.pgm floor_hist_eq.pgm hist_eq 2
+0 0 100 250 100 200
+400 0 100 300 50 100
+lena.pgm lena_hist_eq.pgm hist_eq 2
+0 0 200 200 100 200
+0 300 200 150 150 200
+tree.pgm tree_canny.pgm canny_edge 1
+200 200 300 100 200 300
+picasso.pgm picasso_canny.pgm canny_edge 2
+0 0 300 250 100 200
+600 100 300 150 200
+tree.pgm tree_sobel.pgm sobel_edge 1
+200 200 300 100 200 300
+picasso.pgm picasso_sobel.pgm sobel_edge 2
+0 0 300 250 100 200
+600 100 300 150 200
+tree.pgm tree_sobel.pgm sobel_edge 1
+200 200 300 100 200 300
+picasso.pgm picasso_sobel.pgm sobel_edge 2
+0 0 300 250 100 200
+600 100 300 150 200
+tree.pgm tree_comb_ops_sobel.pgm comb_ops_sobel_edge 1
+200 200 300 100 200 300
+picasso.pgm picasso_comb_ops_sobel.pgm comb_ops_sobel_edge 2
+0 0 300 250 100 200
+600 100 300 150 200
+tree.pgm tree_comb_ops_canny.pgm comb_ops_canny_edge 1
+200 200 300 100 200 300
+picasso.pgm picasso_comb_ops_canny.pgm comb_ops_canny_edge 2
+0 0 300 250 100 200
+600 100 300 150 200
+qr_alphabet.jpg qr_alphabet.jpg qr_decode 0
 qr_cap4401.png qr_cap4401.png qr_decode 0
 qr_stuff_paper.jpg qr_stuff_paper.jpg qr_decode 0
 qr_stuff_monitor.jpg qr_stuff_monitor.jpg qr_decode 0
