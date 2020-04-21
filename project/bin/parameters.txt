@@ -20,14 +20,14 @@ tree.pgm tree_sobel.pgm sobel_edge 1
 picasso.pgm picasso_sobel.pgm sobel_edge 2
 0 0 200 200 20
 600 100 300 100 30
-tree.pgm tree_comb_ops_sobel.pgm comb_ops_sobel_edge 1
+tree.pgm tree_comb_ops_sobel.pgm comb_ops_sobel 1
 200 200 300 100 200 300
-picasso.pgm picasso_comb_ops_sobel.pgm comb_ops_sobel_edge 2
+picasso.pgm picasso_comb_ops_sobel.pgm comb_ops_sobel 2
 0 0 200 200 20
 600 100 300 100 30
-tree.pgm tree_comb_ops_canny.pgm comb_ops_canny_edge 1
+tree.pgm tree_comb_ops_canny.pgm comb_ops_canny 1
 200 200 300 100 200 300
-picasso.pgm picasso_comb_ops_canny.pgm comb_ops_canny_edge 2
+picasso.pgm picasso_comb_ops_canny.pgm comb_ops_canny 2
 0 0 200 200 100 200
 600 100 300 200 150 200
 qr_alphabet.jpg qr_alphabet.jpg qr_decode 0
