@@ -11,22 +11,22 @@ lena.pgm lena_hist_eq.pgm hist_eq 2
 0 0 200 200 100 200
 0 300 200 150 150 200
 tree.pgm tree_canny.pgm canny_edge 1
-200 200 300 100 200 300
+0 0 500 300 200 300
 picasso.pgm picasso_canny.pgm canny_edge 2
 0 0 200 200 100 200
 600 100 300 200 150 200
 tree.pgm tree_sobel.pgm sobel_edge 1
-200 200 300 100 20
+0 0 500 300 15
 picasso.pgm picasso_sobel.pgm sobel_edge 2
-0 0 200 200 20
-600 100 300 100 30
+0 0 200 200 15
+600 100 300 100 20
 tree.pgm tree_comb_ops_sobel.pgm comb_ops_sobel 1
-200 200 300 100 200 300
+0 0 500 300 15
 picasso.pgm picasso_comb_ops_sobel.pgm comb_ops_sobel 2
-0 0 200 200 20
-600 100 300 100 30
+0 0 200 200 15
+600 100 300 100 20
 tree.pgm tree_comb_ops_canny.pgm comb_ops_canny 1
-200 200 300 100 200 300
+0 0 500 300 200 300
 picasso.pgm picasso_comb_ops_canny.pgm comb_ops_canny 2
 0 0 200 200 100 200
 600 100 300 200 150 200
